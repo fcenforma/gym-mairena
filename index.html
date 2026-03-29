@@ -9,15 +9,18 @@
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f2f2f7; min-height: 100vh; }
 
   .header { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 16px 20px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 10; }
-  .title { font-size: 20px; font-weight: 600; color: #1c1c1e; flex: 1; }
+  .title { font-size: 20px; font-weight: 600; color: #1c1c1e; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .btn { padding: 10px 18px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 15px; color: #1c1c1e; font-family: inherit; white-space: nowrap; }
   .btn:active { opacity: 0.6; }
-  .btn-back { padding: 10px 16px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 16px; color: #1c1c1e; font-family: inherit; }
+  .btn-back { padding: 10px 16px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 16px; color: #1c1c1e; font-family: inherit; flex-shrink: 0; }
   .btn-green { background: #e8f8f2; color: #0f6e56; border-color: #5DCAA5; font-weight: 600; }
+  .btn-blue { background: #eef4ff; color: #185FA5; border-color: #378ADD; }
   .btn-red { background: #fdecea; color: #c0392b; border-color: #e74c3c; }
-  .saving { font-size: 13px; color: #8e8e93; opacity: 0; transition: opacity 0.3s; }
+  .btn-save { width: 100%; padding: 16px; border: none; border-radius: 12px; background: #1D9E75; cursor: pointer; font-size: 17px; font-weight: 600; color: #fff; font-family: inherit; margin-bottom: 16px; }
+  .btn-save:active { opacity: 0.7; }
+  .saving { font-size: 13px; color: #8e8e93; opacity: 0; transition: opacity 0.3s; flex-shrink: 0; }
   .saving.show { opacity: 1; }
-  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ccc; margin-right: 6px; }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ccc; margin-right: 6px; flex-shrink: 0; }
   .status-dot.online { background: #1D9E75; }
 
   .content { padding: 14px 16px; }
@@ -29,13 +32,16 @@
   .client-arrow { font-size: 22px; color: #8e8e93; }
 
   .ex-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 14px; padding: 18px 18px 14px; margin-bottom: 10px; }
-  .ex-name { font-size: 16px; font-weight: 600; color: #1c1c1e; margin-bottom: 14px; }
+  .ex-name-btn { font-size: 16px; font-weight: 600; color: #185FA5; margin-bottom: 14px; background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; padding: 0; text-decoration: underline; text-decoration-color: #b0c8e8; display: block; }
   .ctrl-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
   .ctrl-label { font-size: 13px; color: #8e8e93; width: 60px; flex-shrink: 0; }
   .ctrl-btn { width: 52px; height: 52px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: #f2f2f7; cursor: pointer; font-size: 26px; font-weight: 300; color: #1c1c1e; display: flex; align-items: center; justify-content: center; font-family: inherit; user-select: none; }
   .ctrl-btn:active { background: #e0e0e0; }
   .ctrl-val { min-width: 56px; text-align: center; font-size: 24px; font-weight: 600; color: #1c1c1e; }
   .ctrl-unit { font-size: 13px; color: #8e8e93; }
+
+  .action-row { display: flex; gap: 10px; margin-bottom: 16px; }
+  .action-row .btn { flex: 1; text-align: center; }
 
   .modal-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 100; }
   .modal { background: #fff; border-radius: 16px; padding: 28px 24px; width: 90%; max-width: 380px; }
@@ -47,17 +53,30 @@
   .btn-confirm { flex: 1; padding: 14px; border: none; border-radius: 10px; background: #1D9E75; cursor: pointer; font-size: 16px; font-weight: 600; color: #fff; font-family: inherit; }
 
   .empty { text-align: center; padding: 60px 20px; color: #8e8e93; font-size: 16px; line-height: 1.6; }
-  .del-row { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 16px; }
-  .btn-edit { background: #eef4ff; color: #185FA5; border-color: #378ADD; }
   .loading { text-align: center; padding: 80px 20px; color: #8e8e93; font-size: 16px; }
+
+  .history-section { background: #fff; border: 1px solid #e0e0e0; border-radius: 14px; padding: 18px; margin-bottom: 14px; }
+  .history-title { font-size: 15px; font-weight: 600; color: #1c1c1e; margin-bottom: 14px; }
+  .chart-wrap { position: relative; height: 200px; }
+  .history-list { margin-top: 4px; }
+  .history-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+  .history-row:last-child { border-bottom: none; }
+  .history-date { font-size: 14px; color: #8e8e93; }
+  .history-vals { font-size: 14px; font-weight: 500; color: #1c1c1e; text-align: right; }
+  .no-history { font-size: 14px; color: #8e8e93; text-align: center; padding: 20px 0; }
+
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #1c1c1e; color: #fff; padding: 14px 24px; border-radius: 12px; font-size: 15px; font-weight: 500; z-index: 200; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
+  .toast.show { opacity: 1; }
 </style>
 </head>
 <body>
 
 <div id="app"><div class="loading">Conectando...</div></div>
+<div class="toast" id="toast"></div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyBsAjC-dhwhvRb_ISjbvzxor6phP6d87Z4",
@@ -80,46 +99,36 @@ const EXERCISES = [
   "Sentadilla búlgara","Zancadas","Split Squat","Back Squat"
 ];
 
+function safeKey(name) { return name.replace(/[.#$[\]/\s]/g,'_'); }
+
 function defaultExercises() {
   const obj = {};
-  EXERCISES.forEach(ex => { obj[ex.replace(/[.#$[\]]/g,'')] = { name: ex, weight: 0, reps: 10, sets: 3 }; });
+  EXERCISES.forEach(ex => { obj[safeKey(ex)] = { name: ex, weight: 0, reps: 10, sets: 3 }; });
   return obj;
 }
-
-function safeKey(name) { return name.replace(/[.#$[\]/]/g,'_'); }
 
 let clients = {};
 let view = "clients";
 let selClientKey = null;
+let selExKey = null;
 let showModal = false;
 let showEditModal = false;
 let isOnline = true;
 let savingTimer = null;
+let toastTimer = null;
+let chartInstance = null;
 
 function getClient() { return clients[selClientKey]; }
 function getInitials(name) { return name.trim().split(" ").filter(Boolean).map(n=>n[0]).join("").toUpperCase().slice(0,2); }
+function formatDate(ts) { return new Date(ts).toLocaleDateString('es-ES', { day:'2-digit', month:'2-digit', year:'2-digit' }); }
+function todayKey() { return new Date().toISOString().slice(0,10).replace(/-/g,''); }
 
-db.ref(".info/connected").on("value", snap => {
-  isOnline = snap.val() === true;
-  const dot = document.getElementById("statusDot");
-  if (dot) { dot.className = "status-dot" + (isOnline ? " online" : ""); }
-});
-
-db.ref("clients").on("value", snap => {
-  clients = snap.val() || {};
-  Object.entries(clients).forEach(([key, c]) => {
-    EXERCISES.forEach(ex => {
-      const k = safeKey(ex);
-      if (!c.exercises) c.exercises = {};
-      if (!c.exercises[k]) c.exercises[k] = { name: ex, weight: 0, reps: 10, sets: 3 };
-    });
-  });
-  render();
-});
-
-function saveClient(key) {
-  db.ref("clients/" + key).set(clients[key]);
-  showSaving();
+function showToast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
 }
 
 function showSaving() {
@@ -131,13 +140,63 @@ function showSaving() {
   savingTimer = setTimeout(() => el.classList.remove("show"), 1500);
 }
 
+db.ref(".info/connected").on("value", snap => {
+  isOnline = snap.val() === true;
+  const dot = document.getElementById("statusDot");
+  if (dot) dot.className = "status-dot" + (isOnline ? " online" : "");
+});
+
+db.ref("clients").on("value", snap => {
+  clients = snap.val() || {};
+  Object.entries(clients).forEach(([key, c]) => {
+    if (!c.exercises) c.exercises = {};
+    EXERCISES.forEach(ex => {
+      const k = safeKey(ex);
+      if (!c.exercises[k]) {
+        c.exercises[k] = { name: ex, weight: 0, reps: 10, sets: 3 };
+      } else {
+        if (c.exercises[k].weight === undefined) c.exercises[k].weight = 0;
+        if (c.exercises[k].reps  === undefined) c.exercises[k].reps  = 10;
+        if (c.exercises[k].sets  === undefined) c.exercises[k].sets  = 3;
+        if (!c.exercises[k].name) c.exercises[k].name = ex;
+      }
+    });
+  });
+  render();
+});
+
+function saveSession() {
+  const c = getClient();
+  const ts = Date.now();
+  const dk = todayKey();
+  const updates = {};
+  EXERCISES.forEach(ex => {
+    const k = safeKey(ex);
+    const exData = c.exercises[k];
+    updates[`clients/${selClientKey}/history/${k}/${dk}`] = {
+      ts, weight: exData.weight, reps: exData.reps, sets: exData.sets
+    };
+  });
+  db.ref().update(updates);
+  showToast("Sesión guardada ✓");
+}
+
 function adj(exKey, field, delta) {
   const c = getClient();
   const ex = c.exercises[exKey];
   const step = field === "weight" ? 2.5 : 1;
   ex[field] = Math.max(0, parseFloat((ex[field] + delta * step).toFixed(1)));
-  saveClient(selClientKey);
+  db.ref(`clients/${selClientKey}/exercises/${exKey}`).set(ex);
+  showSaving();
   render();
+}
+
+function addClient(name) {
+  if (!name.trim()) return;
+  const key = "c_" + Date.now();
+  clients[key] = { name: name.trim(), exercises: defaultExercises() };
+  db.ref("clients/" + key).set(clients[key]);
+  showToast("Cliente añadido");
 }
 
 function renameClient(key, newName) {
@@ -147,25 +206,46 @@ function renameClient(key, newName) {
   showSaving();
 }
 
-function addClient(name) {
-  if (!name.trim()) return;
-  const key = "c_" + Date.now();
-  clients[key] = { name: name.trim(), exercises: defaultExercises() };
-  db.ref("clients/" + key).set(clients[key]);
-  showSaving();
-}
-
 function deleteClient(key) {
   if (!confirm("¿Eliminar a " + clients[key].name + "? Esta acción no se puede deshacer.")) return;
   db.ref("clients/" + key).remove();
-  view = "clients";
-  selClientKey = null;
-  render();
+  view = "clients"; selClientKey = null; render();
+}
+
+function drawChart(canvasId, labels, data) {
+  if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || data.length < 2) return;
+  chartInstance = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        data,
+        borderColor: "#1D9E75",
+        backgroundColor: "rgba(29,158,117,0.08)",
+        borderWidth: 2.5,
+        pointBackgroundColor: "#1D9E75",
+        pointRadius: 5,
+        tension: 0.3,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 12 }, color: "#8e8e93" } },
+        y: { grid: { color: "#f0f0f0" }, ticks: { font: { size: 12 }, color: "#8e8e93" } }
+      }
+    }
+  });
 }
 
 function render() {
   const app = document.getElementById("app");
-  const statusDotHtml = `<span class="status-dot${isOnline ? ' online' : ''}" id="statusDot"></span>`;
+  const dotHtml = `<span class="status-dot${isOnline ? ' online' : ''}" id="statusDot"></span>`;
 
   if (view === "clients") {
     const sorted = Object.entries(clients).sort((a,b) => a[1].name.localeCompare(b[1].name));
@@ -176,8 +256,7 @@ function render() {
           <div class="avatar">${getInitials(c.name)}</div>
           <span class="client-name">${c.name}</span>
           <span class="client-arrow">›</span>
-        </div>
-      `).join("");
+        </div>`).join("");
 
     const modal = showModal ? `
       <div class="modal-bg" id="modalBg">
@@ -193,24 +272,26 @@ function render() {
 
     app.innerHTML = `
       <div class="header">
-        <p class="title">${statusDotHtml}Clientes</p>
+        <p class="title">${dotHtml}Clientes</p>
         <span class="saving" id="savingIndicator"></span>
         <button class="btn btn-green" id="addClientBtn">+ Cliente</button>
       </div>
       <div class="content">${rows}</div>
-      ${modal}
-    `;
+      ${modal}`;
 
-  } else {
+  } else if (view === "client") {
     const c = getClient();
     const exCards = EXERCISES.map(exName => {
       const k = safeKey(exName);
       const ex = c.exercises[k] || { weight: 0, reps: 10, sets: 3 };
-      const wDisplay = ex.weight === 0 ? "PC" : ex.weight;
-      const wUnit = ex.weight !== 0 ? `<span class="ctrl-unit">kg</span>` : "";
+      const weight = ex.weight !== undefined ? ex.weight : 0;
+      const reps   = ex.reps   !== undefined ? ex.reps   : 10;
+      const sets   = ex.sets   !== undefined ? ex.sets   : 3;
+      const wDisplay = weight === 0 ? "PC" : weight;
+      const wUnit = weight !== 0 ? `<span class="ctrl-unit">kg</span>` : "";
       return `
         <div class="ex-card">
-          <div class="ex-name">${exName}</div>
+          <button class="ex-name-btn" data-exk="${k}">${exName} ›</button>
           <div class="ctrl-row">
             <span class="ctrl-label">Peso</span>
             <button class="ctrl-btn" data-exk="${k}" data-field="weight" data-delta="-1">−</button>
@@ -220,33 +301,19 @@ function render() {
           <div class="ctrl-row">
             <span class="ctrl-label">Reps</span>
             <button class="ctrl-btn" data-exk="${k}" data-field="reps" data-delta="-1">−</button>
-            <span class="ctrl-val">${ex.reps}</span>
+            <span class="ctrl-val">${reps}</span>
             <button class="ctrl-btn" data-exk="${k}" data-field="reps" data-delta="1">+</button>
           </div>
           <div class="ctrl-row">
             <span class="ctrl-label">Series</span>
             <button class="ctrl-btn" data-exk="${k}" data-field="sets" data-delta="-1">−</button>
-            <span class="ctrl-val">${ex.sets}</span>
+            <span class="ctrl-val">${sets}</span>
             <button class="ctrl-btn" data-exk="${k}" data-field="sets" data-delta="1">+</button>
           </div>
-        </div>
-      `;
+        </div>`;
     }).join("");
 
-    app.innerHTML = `
-      <div class="header">
-        <button class="btn-back" id="backBtn">‹ Clientes</button>
-        <p class="title">${c.name}</p>
-        <span class="saving" id="savingIndicator"></span>
-      </div>
-      <div class="content">
-        <div class="del-row">
-          <button class="btn btn-edit" id="editNameBtn">Editar nombre</button>
-          <button class="btn btn-red" id="deleteClientBtn">Eliminar cliente</button>
-        </div>
-        ${exCards}
-      </div>
-      ${showEditModal ? `
+    const editModal = showEditModal ? `
       <div class="modal-bg" id="editModalBg">
         <div class="modal">
           <div class="modal-title">Editar nombre</div>
@@ -256,9 +323,65 @@ function render() {
             <button class="btn-confirm" id="editConfirmBtn">Guardar</button>
           </div>
         </div>
-      </div>` : ""}
-    `;
+      </div>` : "";
+
+    app.innerHTML = `
+      <div class="header">
+        <button class="btn-back" id="backBtn">‹ Clientes</button>
+        <p class="title">${c.name}</p>
+        <span class="saving" id="savingIndicator"></span>
+      </div>
+      <div class="content">
+        <button class="btn-save" id="saveSessionBtn">Guardar sesión de hoy</button>
+        <div class="action-row">
+          <button class="btn btn-blue" id="editNameBtn">Editar nombre</button>
+          <button class="btn btn-red" id="deleteClientBtn">Eliminar cliente</button>
+        </div>
+        ${exCards}
+      </div>
+      ${editModal}`;
+
+  } else if (view === "history") {
+    const c = getClient();
+    const ex = c.exercises[selExKey];
+    const exName = ex ? ex.name : selExKey;
+    const historyRaw = (c.history && c.history[selExKey]) ? c.history[selExKey] : {};
+    const entries = Object.entries(historyRaw).sort((a,b) => a[0].localeCompare(b[0]));
+    const labels = entries.map(([,v]) => formatDate(v.ts));
+    const weights = entries.map(([,v]) => v.weight);
+
+    const chartSection = entries.length >= 2 ? `
+      <div class="history-section">
+        <div class="history-title">Evolución del peso</div>
+        <div class="chart-wrap"><canvas id="progressChart"></canvas></div>
+      </div>` : "";
+
+    const listRows = entries.length === 0
+      ? `<div class="no-history">Sin sesiones registradas todavía.<br>Pulsa "Guardar sesión de hoy" desde el perfil del cliente.</div>`
+      : [...entries].reverse().map(([,v]) => `
+        <div class="history-row">
+          <span class="history-date">${formatDate(v.ts)}</span>
+          <span class="history-vals">${v.weight === 0 ? "PC" : v.weight + " kg"} · ${v.reps} reps · ${v.sets} series</span>
+        </div>`).join("");
+
+    app.innerHTML = `
+      <div class="header">
+        <button class="btn-back" id="backBtn">‹ ${c.name}</button>
+        <p class="title">${exName}</p>
+      </div>
+      <div class="content">
+        ${chartSection}
+        <div class="history-section">
+          <div class="history-title">Historial de sesiones</div>
+          <div class="history-list">${listRows}</div>
+        </div>
+      </div>`;
+
+    if (entries.length >= 2) {
+      setTimeout(() => drawChart("progressChart", labels, weights), 50);
+    }
   }
+
   attachEvents();
 }
 
@@ -266,8 +389,16 @@ function attachEvents() {
   document.querySelectorAll(".client-row").forEach(el => {
     el.addEventListener("click", () => { selClientKey = el.dataset.key; view = "client"; render(); });
   });
+
   const backBtn = document.getElementById("backBtn");
-  if (backBtn) backBtn.addEventListener("click", () => { view = "clients"; selClientKey = null; render(); });
+  if (backBtn) backBtn.addEventListener("click", () => {
+    if (view === "client") { view = "clients"; selClientKey = null; }
+    else if (view === "history") { view = "client"; selExKey = null; }
+    render();
+  });
+
+  const saveSessionBtn = document.getElementById("saveSessionBtn");
+  if (saveSessionBtn) saveSessionBtn.addEventListener("click", saveSession);
 
   const addClientBtn = document.getElementById("addClientBtn");
   if (addClientBtn) addClientBtn.addEventListener("click", () => { showModal = true; render(); });
@@ -277,11 +408,9 @@ function attachEvents() {
 
   function confirmAdd() {
     const input = document.getElementById("newClientInput");
-    if (input && input.value.trim()) { addClient(input.value); }
-    showModal = false;
-    render();
+    if (input && input.value.trim()) addClient(input.value);
+    showModal = false; render();
   }
-
   const confirmBtn = document.getElementById("confirmBtn");
   if (confirmBtn) confirmBtn.addEventListener("click", confirmAdd);
 
@@ -294,9 +423,6 @@ function attachEvents() {
     });
   }
 
-  const deleteClientBtn = document.getElementById("deleteClientBtn");
-  if (deleteClientBtn) deleteClientBtn.addEventListener("click", () => deleteClient(selClientKey));
-
   const editNameBtn = document.getElementById("editNameBtn");
   if (editNameBtn) editNameBtn.addEventListener("click", () => { showEditModal = true; render(); });
 
@@ -306,17 +432,14 @@ function attachEvents() {
   function confirmEdit() {
     const input = document.getElementById("editNameInput");
     if (input && input.value.trim()) renameClient(selClientKey, input.value);
-    showEditModal = false;
-    render();
+    showEditModal = false; render();
   }
-
   const editConfirmBtn = document.getElementById("editConfirmBtn");
   if (editConfirmBtn) editConfirmBtn.addEventListener("click", confirmEdit);
 
   const editNameInput = document.getElementById("editNameInput");
   if (editNameInput) {
-    editNameInput.focus();
-    editNameInput.select();
+    editNameInput.focus(); editNameInput.select();
     editNameInput.addEventListener("keydown", e => {
       if (e.key === "Enter") confirmEdit();
       if (e.key === "Escape") { showEditModal = false; render(); }
@@ -326,8 +449,15 @@ function attachEvents() {
   const editModalBg = document.getElementById("editModalBg");
   if (editModalBg) editModalBg.addEventListener("click", e => { if (e.target === editModalBg) { showEditModal = false; render(); } });
 
+  const deleteClientBtn = document.getElementById("deleteClientBtn");
+  if (deleteClientBtn) deleteClientBtn.addEventListener("click", () => deleteClient(selClientKey));
+
   document.querySelectorAll(".ctrl-btn").forEach(btn => {
     btn.addEventListener("click", () => adj(btn.dataset.exk, btn.dataset.field, parseInt(btn.dataset.delta)));
+  });
+
+  document.querySelectorAll(".ex-name-btn").forEach(btn => {
+    btn.addEventListener("click", () => { selExKey = btn.dataset.exk; view = "history"; render(); });
   });
 
   const modalBg = document.getElementById("modalBg");
