@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FC En Forma – Lifting</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f2f2f7; min-height: 100vh; }
+
+  .header { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 16px 20px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 10; }
+  .title { font-size: 20px; font-weight: 600; color: #1c1c1e; flex: 1; }
+  .btn { padding: 10px 18px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 15px; color: #1c1c1e; font-family: inherit; white-space: nowrap; }
+  .btn:active { opacity: 0.6; }
+  .btn-back { padding: 10px 16px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 16px; color: #1c1c1e; font-family: inherit; }
+  .btn-green { background: #e8f8f2; color: #0f6e56; border-color: #5DCAA5; font-weight: 600; }
+  .btn-red { background: #fdecea; color: #c0392b; border-color: #e74c3c; }
+  .saving { font-size: 13px; color: #8e8e93; opacity: 0; transition: opacity 0.3s; }
+  .saving.show { opacity: 1; }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ccc; margin-right: 6px; }
+  .status-dot.online { background: #1D9E75; }
+
+  .content { padding: 14px 16px; }
+
+  .client-row { background: #fff; border: 1px solid #e0e0e0; border-radius: 14px; padding: 18px 20px; margin-bottom: 10px; display: flex; align-items: center; gap: 16px; cursor: pointer; }
+  .client-row:active { opacity: 0.7; }
+  .avatar { width: 48px; height: 48px; border-radius: 50%; background: #dbeeff; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; color: #185FA5; flex-shrink: 0; }
+  .client-name { font-size: 19px; font-weight: 500; color: #1c1c1e; flex: 1; }
+  .client-arrow { font-size: 22px; color: #8e8e93; }
+
+  .ex-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 14px; padding: 18px 18px 14px; margin-bottom: 10px; }
+  .ex-name { font-size: 16px; font-weight: 600; color: #1c1c1e; margin-bottom: 14px; }
+  .ctrl-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .ctrl-label { font-size: 13px; color: #8e8e93; width: 60px; flex-shrink: 0; }
+  .ctrl-btn { width: 52px; height: 52px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: #f2f2f7; cursor: pointer; font-size: 26px; font-weight: 300; color: #1c1c1e; display: flex; align-items: center; justify-content: center; font-family: inherit; user-select: none; }
+  .ctrl-btn:active { background: #e0e0e0; }
+  .ctrl-val { min-width: 56px; text-align: center; font-size: 24px; font-weight: 600; color: #1c1c1e; }
+  .ctrl-unit { font-size: 13px; color: #8e8e93; }
+
+  .modal-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 100; }
+  .modal { background: #fff; border-radius: 16px; padding: 28px 24px; width: 90%; max-width: 380px; }
+  .modal-title { font-size: 18px; font-weight: 600; color: #1c1c1e; margin-bottom: 18px; }
+  .modal-input { width: 100%; padding: 14px 16px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: #f2f2f7; font-size: 17px; color: #1c1c1e; font-family: inherit; outline: none; margin-bottom: 16px; }
+  .modal-input:focus { border-color: #1D9E75; }
+  .modal-actions { display: flex; gap: 10px; }
+  .btn-cancel { flex: 1; padding: 14px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 16px; color: #8e8e93; font-family: inherit; }
+  .btn-confirm { flex: 1; padding: 14px; border: none; border-radius: 10px; background: #1D9E75; cursor: pointer; font-size: 16px; font-weight: 600; color: #fff; font-family: inherit; }
+
+  .empty { text-align: center; padding: 60px 20px; color: #8e8e93; font-size: 16px; line-height: 1.6; }
+  .del-row { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 16px; }
+  .btn-edit { background: #eef4ff; color: #185FA5; border-color: #378ADD; }
+  .loading { text-align: center; padding: 80px 20px; color: #8e8e93; font-size: 16px; }
+</style>
+</head>
+<body>
+
+<div id="app"><div class="loading">Conectando...</div></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBsAjC-dhwhvRb_ISjbvzxor6phP6d87Z4",
+  authDomain: "fc-enforma-lifting.firebaseapp.com",
+  databaseURL: "https://fc-enforma-lifting-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "fc-enforma-lifting",
+  storageBucket: "fc-enforma-lifting.firebasestorage.app",
+  messagingSenderId: "393528017035",
+  appId: "1:393528017035:web:82adb7329ea704c795148e"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+const EXERCISES = [
+  "Press banca BB","Press plano mancuernas","Press militar BB","Press militar DB",
+  "Press inclinado DB","Flexiones","Jalón abierto al pecho","Remo gironda",
+  "Remo a una mano DB","Jalón de bíceps","Chin ups","Peso muerto convencional BB",
+  "Peso muerto rumano BB","Peso muerto sumo BB","Hip thrust BB",
+  "Sentadilla búlgara","Zancadas","Split Squat","Back Squat"
+];
+
+function defaultExercises() {
+  const obj = {};
+  EXERCISES.forEach(ex => { obj[ex.replace(/[.#$[\]]/g,'')] = { name: ex, weight: 0, reps: 10, sets: 3 }; });
+  return obj;
+}
+
+function safeKey(name) { return name.replace(/[.#$[\]/]/g,'_'); }
+
+let clients = {};
+let view = "clients";
+let selClientKey = null;
+let showModal = false;
+let showEditModal = false;
+let isOnline = true;
+let savingTimer = null;
+
+function getClient() { return clients[selClientKey]; }
+function getInitials(name) { return name.trim().split(" ").filter(Boolean).map(n=>n[0]).join("").toUpperCase().slice(0,2); }
+
+db.ref(".info/connected").on("value", snap => {
+  isOnline = snap.val() === true;
+  const dot = document.getElementById("statusDot");
+  if (dot) { dot.className = "status-dot" + (isOnline ? " online" : ""); }
+});
+
+db.ref("clients").on("value", snap => {
+  clients = snap.val() || {};
+  Object.entries(clients).forEach(([key, c]) => {
+    EXERCISES.forEach(ex => {
+      const k = safeKey(ex);
+      if (!c.exercises) c.exercises = {};
+      if (!c.exercises[k]) c.exercises[k] = { name: ex, weight: 0, reps: 10, sets: 3 };
+    });
+  });
+  render();
+});
+
+function saveClient(key) {
+  db.ref("clients/" + key).set(clients[key]);
+  showSaving();
+}
+
+function showSaving() {
+  const el = document.getElementById("savingIndicator");
+  if (!el) return;
+  el.textContent = "Guardado";
+  el.classList.add("show");
+  clearTimeout(savingTimer);
+  savingTimer = setTimeout(() => el.classList.remove("show"), 1500);
+}
+
+function adj(exKey, field, delta) {
+  const c = getClient();
+  const ex = c.exercises[exKey];
+  const step = field === "weight" ? 2.5 : 1;
+  ex[field] = Math.max(0, parseFloat((ex[field] + delta * step).toFixed(1)));
+  saveClient(selClientKey);
+  render();
+}
+
+function renameClient(key, newName) {
+  if (!newName.trim()) return;
+  clients[key].name = newName.trim();
+  db.ref("clients/" + key + "/name").set(newName.trim());
+  showSaving();
+}
+
+function addClient(name) {
+  if (!name.trim()) return;
+  const key = "c_" + Date.now();
+  clients[key] = { name: name.trim(), exercises: defaultExercises() };
+  db.ref("clients/" + key).set(clients[key]);
+  showSaving();
+}
+
+function deleteClient(key) {
+  if (!confirm("¿Eliminar a " + clients[key].name + "? Esta acción no se puede deshacer.")) return;
+  db.ref("clients/" + key).remove();
+  view = "clients";
+  selClientKey = null;
+  render();
+}
+
+function render() {
+  const app = document.getElementById("app");
+  const statusDotHtml = `<span class="status-dot${isOnline ? ' online' : ''}" id="statusDot"></span>`;
+
+  if (view === "clients") {
+    const sorted = Object.entries(clients).sort((a,b) => a[1].name.localeCompare(b[1].name));
+    const rows = sorted.length === 0
+      ? `<div class="empty">Sin clientes todavía.<br>Pulsa "+ Cliente" para añadir.</div>`
+      : sorted.map(([key, c]) => `
+        <div class="client-row" data-key="${key}">
+          <div class="avatar">${getInitials(c.name)}</div>
+          <span class="client-name">${c.name}</span>
+          <span class="client-arrow">›</span>
+        </div>
+      `).join("");
+
+    const modal = showModal ? `
+      <div class="modal-bg" id="modalBg">
+        <div class="modal">
+          <div class="modal-title">Nuevo cliente</div>
+          <input class="modal-input" id="newClientInput" placeholder="Nombre y apellido" autocomplete="off">
+          <div class="modal-actions">
+            <button class="btn-cancel" id="cancelBtn">Cancelar</button>
+            <button class="btn-confirm" id="confirmBtn">Añadir</button>
+          </div>
+        </div>
+      </div>` : "";
+
+    app.innerHTML = `
+      <div class="header">
+        <p class="title">${statusDotHtml}Clientes</p>
+        <span class="saving" id="savingIndicator"></span>
+        <button class="btn btn-green" id="addClientBtn">+ Cliente</button>
+      </div>
+      <div class="content">${rows}</div>
+      ${modal}
+    `;
+
+  } else {
+    const c = getClient();
+    const exCards = EXERCISES.map(exName => {
+      const k = safeKey(exName);
+      const ex = c.exercises[k] || { weight: 0, reps: 10, sets: 3 };
+      const wDisplay = ex.weight === 0 ? "PC" : ex.weight;
+      const wUnit = ex.weight !== 0 ? `<span class="ctrl-unit">kg</span>` : "";
+      return `
+        <div class="ex-card">
+          <div class="ex-name">${exName}</div>
+          <div class="ctrl-row">
+            <span class="ctrl-label">Peso</span>
+            <button class="ctrl-btn" data-exk="${k}" data-field="weight" data-delta="-1">−</button>
+            <span class="ctrl-val">${wDisplay}</span>${wUnit}
+            <button class="ctrl-btn" data-exk="${k}" data-field="weight" data-delta="1">+</button>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-label">Reps</span>
+            <button class="ctrl-btn" data-exk="${k}" data-field="reps" data-delta="-1">−</button>
+            <span class="ctrl-val">${ex.reps}</span>
+            <button class="ctrl-btn" data-exk="${k}" data-field="reps" data-delta="1">+</button>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-label">Series</span>
+            <button class="ctrl-btn" data-exk="${k}" data-field="sets" data-delta="-1">−</button>
+            <span class="ctrl-val">${ex.sets}</span>
+            <button class="ctrl-btn" data-exk="${k}" data-field="sets" data-delta="1">+</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    app.innerHTML = `
+      <div class="header">
+        <button class="btn-back" id="backBtn">‹ Clientes</button>
+        <p class="title">${c.name}</p>
+        <span class="saving" id="savingIndicator"></span>
+      </div>
+      <div class="content">
+        <div class="del-row">
+          <button class="btn btn-edit" id="editNameBtn">Editar nombre</button>
+          <button class="btn btn-red" id="deleteClientBtn">Eliminar cliente</button>
+        </div>
+        ${exCards}
+      </div>
+      ${showEditModal ? `
+      <div class="modal-bg" id="editModalBg">
+        <div class="modal">
+          <div class="modal-title">Editar nombre</div>
+          <input class="modal-input" id="editNameInput" value="${c.name}" autocomplete="off">
+          <div class="modal-actions">
+            <button class="btn-cancel" id="editCancelBtn">Cancelar</button>
+            <button class="btn-confirm" id="editConfirmBtn">Guardar</button>
+          </div>
+        </div>
+      </div>` : ""}
+    `;
+  }
+  attachEvents();
+}
+
+function attachEvents() {
+  document.querySelectorAll(".client-row").forEach(el => {
+    el.addEventListener("click", () => { selClientKey = el.dataset.key; view = "client"; render(); });
+  });
+  const backBtn = document.getElementById("backBtn");
+  if (backBtn) backBtn.addEventListener("click", () => { view = "clients"; selClientKey = null; render(); });
+
+  const addClientBtn = document.getElementById("addClientBtn");
+  if (addClientBtn) addClientBtn.addEventListener("click", () => { showModal = true; render(); });
+
+  const cancelBtn = document.getElementById("cancelBtn");
+  if (cancelBtn) cancelBtn.addEventListener("click", () => { showModal = false; render(); });
+
+  function confirmAdd() {
+    const input = document.getElementById("newClientInput");
+    if (input && input.value.trim()) { addClient(input.value); }
+    showModal = false;
+    render();
+  }
+
+  const confirmBtn = document.getElementById("confirmBtn");
+  if (confirmBtn) confirmBtn.addEventListener("click", confirmAdd);
+
+  const newClientInput = document.getElementById("newClientInput");
+  if (newClientInput) {
+    newClientInput.focus();
+    newClientInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") confirmAdd();
+      if (e.key === "Escape") { showModal = false; render(); }
+    });
+  }
+
+  const deleteClientBtn = document.getElementById("deleteClientBtn");
+  if (deleteClientBtn) deleteClientBtn.addEventListener("click", () => deleteClient(selClientKey));
+
+  const editNameBtn = document.getElementById("editNameBtn");
+  if (editNameBtn) editNameBtn.addEventListener("click", () => { showEditModal = true; render(); });
+
+  const editCancelBtn = document.getElementById("editCancelBtn");
+  if (editCancelBtn) editCancelBtn.addEventListener("click", () => { showEditModal = false; render(); });
+
+  function confirmEdit() {
+    const input = document.getElementById("editNameInput");
+    if (input && input.value.trim()) renameClient(selClientKey, input.value);
+    showEditModal = false;
+    render();
+  }
+
+  const editConfirmBtn = document.getElementById("editConfirmBtn");
+  if (editConfirmBtn) editConfirmBtn.addEventListener("click", confirmEdit);
+
+  const editNameInput = document.getElementById("editNameInput");
+  if (editNameInput) {
+    editNameInput.focus();
+    editNameInput.select();
+    editNameInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") confirmEdit();
+      if (e.key === "Escape") { showEditModal = false; render(); }
+    });
+  }
+
+  const editModalBg = document.getElementById("editModalBg");
+  if (editModalBg) editModalBg.addEventListener("click", e => { if (e.target === editModalBg) { showEditModal = false; render(); } });
+
+  document.querySelectorAll(".ctrl-btn").forEach(btn => {
+    btn.addEventListener("click", () => adj(btn.dataset.exk, btn.dataset.field, parseInt(btn.dataset.delta)));
+  });
+
+  const modalBg = document.getElementById("modalBg");
+  if (modalBg) modalBg.addEventListener("click", e => { if (e.target === modalBg) { showModal = false; render(); } });
+}
+</script>
+</body>
+</html>
