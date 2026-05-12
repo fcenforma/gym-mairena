@@ -13,14 +13,14 @@
   .btn { padding: 10px 18px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 15px; color: #1c1c1e; font-family: inherit; white-space: nowrap; }
   .btn:active { opacity: 0.6; }
   .btn-back { padding: 10px 16px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 16px; color: #1c1c1e; font-family: inherit; flex-shrink: 0; }
-  .btn-green { background: #e8f8f2; color: #0f6e56; border-color: #5DCAA5; font-weight: 600; }
-  .btn-blue { background: #eef4ff; color: #185FA5; border-color: #378ADD; }
-  .btn-red { background: #fdecea; color: #c0392b; border-color: #e74c3c; }
-  .btn-save { width: 100%; padding: 16px; border: none; border-radius: 12px; background: #1D9E75; cursor: pointer; font-size: 17px; font-weight: 600; color: #fff; font-family: inherit; margin-bottom: 16px; }
+  .btn-green  { background: #e8f8f2; color: #0f6e56; border-color: #5DCAA5; font-weight: 600; }
+  .btn-blue   { background: #eef4ff; color: #185FA5; border-color: #378ADD; }
+  .btn-red    { background: #fdecea; color: #c0392b; border-color: #e74c3c; }
+  .btn-save   { width: 100%; padding: 16px; border: none; border-radius: 12px; background: #1D9E75; cursor: pointer; font-size: 17px; font-weight: 600; color: #fff; font-family: inherit; margin-bottom: 16px; }
   .btn-save:active { opacity: 0.7; }
   .saving { font-size: 13px; color: #8e8e93; opacity: 0; transition: opacity 0.3s; flex-shrink: 0; }
   .saving.show { opacity: 1; }
-  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ccc; margin-right: 6px; flex-shrink: 0; }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ccc; margin-right: 6px; }
   .status-dot.online { background: #1D9E75; }
 
   .content { padding: 14px 16px; }
@@ -33,15 +33,29 @@
 
   .ex-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 14px; padding: 18px 18px 14px; margin-bottom: 10px; }
   .ex-name-btn { font-size: 16px; font-weight: 600; color: #185FA5; margin-bottom: 14px; background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; padding: 0; text-decoration: underline; text-decoration-color: #b0c8e8; display: block; }
-  .ctrl-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .ctrl-label { font-size: 13px; color: #8e8e93; width: 60px; flex-shrink: 0; }
-  .ctrl-btn { width: 52px; height: 52px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: #f2f2f7; cursor: pointer; font-size: 26px; font-weight: 300; color: #1c1c1e; display: flex; align-items: center; justify-content: center; font-family: inherit; user-select: none; }
+  .ex-name-custom { font-size: 16px; font-weight: 600; color: #7B5EA7; margin-bottom: 14px; background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; padding: 0; text-decoration: underline; text-decoration-color: #c8b0e8; display: block; }
+
+  .ctrl-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .ctrl-label { font-size: 13px; color: #8e8e93; width: 58px; flex-shrink: 0; }
+  .ctrl-btn { width: 48px; height: 48px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: #f2f2f7; cursor: pointer; font-size: 26px; font-weight: 300; color: #1c1c1e; display: flex; align-items: center; justify-content: center; font-family: inherit; user-select: none; flex-shrink: 0; }
   .ctrl-btn:active { background: #e0e0e0; }
-  .ctrl-val { min-width: 56px; text-align: center; font-size: 24px; font-weight: 600; color: #1c1c1e; }
-  .ctrl-unit { font-size: 13px; color: #8e8e93; }
+  .num-input { width: 68px; text-align: center; font-size: 22px; font-weight: 600; color: #1c1c1e; border: none; border-bottom: 2px solid #e0e0e0; background: transparent; font-family: inherit; outline: none; padding: 2px 0; -moz-appearance: textfield; }
+  .num-input::-webkit-outer-spin-button, .num-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .num-input:focus { border-bottom-color: #1D9E75; }
+  .ctrl-unit { font-size: 13px; color: #8e8e93; flex-shrink: 0; }
+
+  /* Gomas Chin ups */
+  .band-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; flex: 1; }
+  .band-circle { width: 38px; height: 38px; border-radius: 50%; border: 3px solid transparent; cursor: pointer; flex-shrink: 0; transition: transform 0.15s; }
+  .band-circle.active { border-color: #1c1c1e; transform: scale(1.2); }
+  .band-none-btn { padding: 8px 12px; border-radius: 20px; border: 1.5px solid #d0d0d0; background: #f2f2f7; font-size: 13px; color: #8e8e93; cursor: pointer; font-family: inherit; }
+  .band-none-btn.active { border-color: #1c1c1e; color: #1c1c1e; font-weight: 600; background: #e8e8e8; }
 
   .action-row { display: flex; gap: 10px; margin-bottom: 16px; }
   .action-row .btn { flex: 1; text-align: center; }
+  .section-label { font-size: 12px; font-weight: 600; color: #8e8e93; text-transform: uppercase; letter-spacing: 0.5px; margin: 20px 0 10px; }
+  .add-ex-btn { width: 100%; padding: 14px; border: 1.5px dashed #d0d0d0; border-radius: 14px; background: transparent; cursor: pointer; font-size: 15px; color: #8e8e93; font-family: inherit; margin-top: 6px; }
+  .add-ex-btn:active { opacity: 0.6; }
 
   .modal-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 100; }
   .modal { background: #fff; border-radius: 16px; padding: 28px 24px; width: 90%; max-width: 380px; }
@@ -49,7 +63,7 @@
   .modal-input { width: 100%; padding: 14px 16px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: #f2f2f7; font-size: 17px; color: #1c1c1e; font-family: inherit; outline: none; margin-bottom: 16px; }
   .modal-input:focus { border-color: #1D9E75; }
   .modal-actions { display: flex; gap: 10px; }
-  .btn-cancel { flex: 1; padding: 14px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 16px; color: #8e8e93; font-family: inherit; }
+  .btn-cancel  { flex: 1; padding: 14px; border: 1.5px solid #d0d0d0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 16px; color: #8e8e93; font-family: inherit; }
   .btn-confirm { flex: 1; padding: 14px; border: none; border-radius: 10px; background: #1D9E75; cursor: pointer; font-size: 16px; font-weight: 600; color: #fff; font-family: inherit; }
 
   .empty { text-align: center; padding: 60px 20px; color: #8e8e93; font-size: 16px; line-height: 1.6; }
@@ -63,7 +77,8 @@
   .history-row:last-child { border-bottom: none; }
   .history-date { font-size: 14px; color: #8e8e93; }
   .history-vals { font-size: 14px; font-weight: 500; color: #1c1c1e; text-align: right; }
-  .no-history { font-size: 14px; color: #8e8e93; text-align: center; padding: 20px 0; }
+  .no-history { font-size: 14px; color: #8e8e93; text-align: center; padding: 20px 0; line-height: 1.6; }
+  .band-dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
 
   .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #1c1c1e; color: #fff; padding: 14px 24px; border-radius: 12px; font-size: 15px; font-weight: 500; z-index: 200; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
   .toast.show { opacity: 1; }
@@ -78,6 +93,8 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
+
+// ─── Firebase ───────────────────────────────────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyBsAjC-dhwhvRb_ISjbvzxor6phP6d87Z4",
   authDomain: "fc-enforma-lifting.firebaseapp.com",
@@ -87,11 +104,11 @@ const firebaseConfig = {
   messagingSenderId: "393528017035",
   appId: "1:393528017035:web:82adb7329ea704c795148e"
 };
-
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-const EXERCISES = [
+// ─── Constants ──────────────────────────────────────────────────────────────
+const BASE_EXERCISES = [
   "Press banca BB","Press plano mancuernas","Press militar BB","Press militar DB",
   "Press inclinado DB","Flexiones","Jalón abierto al pecho","Remo gironda",
   "Remo a una mano DB","Jalón de bíceps","Chin ups","Peso muerto convencional BB",
@@ -99,29 +116,60 @@ const EXERCISES = [
   "Sentadilla búlgara","Zancadas","Split Squat","Back Squat"
 ];
 
-function safeKey(name) { return name.replace(/[.#$[\]/\s]/g,'_'); }
+const BANDS = [
+  { id: "amarillo", color: "#F5C518", label: "Amarilla" },
+  { id: "verde",    color: "#27AE60", label: "Verde"    },
+  { id: "azul",     color: "#2980B9", label: "Azul"     },
+  { id: "naranja",  color: "#E67E22", label: "Naranja"  },
+];
 
-function defaultExercises() {
-  const obj = {};
-  EXERCISES.forEach(ex => { obj[safeKey(ex)] = { name: ex, weight: 0, reps: 10, sets: 3 }; });
+function safeKey(n) { return n.replace(/[.#$[\]/\s]/g, "_"); }
+const CHIN_KEY = safeKey("Chin ups");
+
+// ─── State ──────────────────────────────────────────────────────────────────
+let clients        = {};
+let customExList   = {};   // { firebaseKey: { name, custom:true } }
+let view           = "clients";
+let selClientKey   = null;
+let selExKey       = null;
+let showModal      = false;
+let showEditModal  = false;
+let showAddExModal = false;
+let isOnline       = true;
+let chartInstance  = null;
+let savingTimer    = null;
+let toastTimer     = null;
+
+// ─── Helpers ────────────────────────────────────────────────────────────────
+function getClient()    { return clients[selClientKey]; }
+function getInitials(n) { return n.trim().split(" ").filter(Boolean).map(w => w[0]).join("").toUpperCase().slice(0, 2); }
+function formatDate(ts) { return new Date(ts).toLocaleDateString("es-ES", { day:"2-digit", month:"2-digit", year:"2-digit" }); }
+function todayKey()     { return new Date().toISOString().slice(0, 10).replace(/-/g, ""); }
+function allExNames()   { return [...BASE_EXERCISES, ...Object.values(customExList).map(e => e.name)]; }
+
+function defaultEx(name) {
+  const obj = { name, weight: 0, reps: 10, sets: 3 };
+  if (safeKey(name) === CHIN_KEY) obj.band = null;
   return obj;
 }
 
-let clients = {};
-let view = "clients";
-let selClientKey = null;
-let selExKey = null;
-let showModal = false;
-let showEditModal = false;
-let isOnline = true;
-let savingTimer = null;
-let toastTimer = null;
-let chartInstance = null;
+function mergeClient(c) {
+  if (!c.exercises) c.exercises = {};
+  allExNames().forEach(n => {
+    const k = safeKey(n);
+    if (!c.exercises[k]) {
+      c.exercises[k] = defaultEx(n);
+    } else {
+      if (c.exercises[k].weight === undefined) c.exercises[k].weight = 0;
+      if (c.exercises[k].reps   === undefined) c.exercises[k].reps   = 10;
+      if (c.exercises[k].sets   === undefined) c.exercises[k].sets   = 3;
+      if (!c.exercises[k].name)                c.exercises[k].name   = n;
+      if (k === CHIN_KEY && c.exercises[k].band === undefined) c.exercises[k].band = null;
+    }
+  });
+}
 
-function getClient() { return clients[selClientKey]; }
-function getInitials(name) { return name.trim().split(" ").filter(Boolean).map(n=>n[0]).join("").toUpperCase().slice(0,2); }
-function formatDate(ts) { return new Date(ts).toLocaleDateString('es-ES', { day:'2-digit', month:'2-digit', year:'2-digit' }); }
-function todayKey() { return new Date().toISOString().slice(0,10).replace(/-/g,''); }
+function isEditing() { return !!document.querySelector(".num-input:focus"); }
 
 function showToast(msg) {
   const el = document.getElementById("toast");
@@ -130,7 +178,6 @@ function showToast(msg) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
 }
-
 function showSaving() {
   const el = document.getElementById("savingIndicator");
   if (!el) return;
@@ -140,53 +187,67 @@ function showSaving() {
   savingTimer = setTimeout(() => el.classList.remove("show"), 1500);
 }
 
+// ─── Firebase listeners ─────────────────────────────────────────────────────
 db.ref(".info/connected").on("value", snap => {
   isOnline = snap.val() === true;
   const dot = document.getElementById("statusDot");
   if (dot) dot.className = "status-dot" + (isOnline ? " online" : "");
 });
 
-db.ref("clients").on("value", snap => {
-  clients = snap.val() || {};
-  Object.entries(clients).forEach(([key, c]) => {
-    if (!c.exercises) c.exercises = {};
-    EXERCISES.forEach(ex => {
-      const k = safeKey(ex);
-      if (!c.exercises[k]) {
-        c.exercises[k] = { name: ex, weight: 0, reps: 10, sets: 3 };
-      } else {
-        if (c.exercises[k].weight === undefined) c.exercises[k].weight = 0;
-        if (c.exercises[k].reps  === undefined) c.exercises[k].reps  = 10;
-        if (c.exercises[k].sets  === undefined) c.exercises[k].sets  = 3;
-        if (!c.exercises[k].name) c.exercises[k].name = ex;
-      }
-    });
-  });
-  render();
+db.ref("customExercises").on("value", snap => {
+  customExList = snap.val() || {};
+  Object.values(clients).forEach(mergeClient);
+  if (!isEditing()) render();
 });
 
+db.ref("clients").on("value", snap => {
+  clients = snap.val() || {};
+  Object.values(clients).forEach(mergeClient);
+  if (!isEditing()) render();
+});
+
+// ─── Actions ────────────────────────────────────────────────────────────────
 function saveSession() {
   const c = getClient();
-  const ts = Date.now();
   const dk = todayKey();
+  const ts = Date.now();
   const updates = {};
-  EXERCISES.forEach(ex => {
-    const k = safeKey(ex);
-    const exData = c.exercises[k];
-    updates[`clients/${selClientKey}/history/${k}/${dk}`] = {
-      ts, weight: exData.weight, reps: exData.reps, sets: exData.sets
-    };
+  allExNames().forEach(n => {
+    const k = safeKey(n);
+    const ex = c.exercises[k];
+    const entry = { ts, reps: ex.reps || 10, sets: ex.sets || 3 };
+    if (k === CHIN_KEY) entry.band = ex.band || null;
+    else entry.weight = ex.weight || 0;
+    updates[`clients/${selClientKey}/history/${k}/${dk}`] = entry;
   });
   db.ref().update(updates);
   showToast("Sesión guardada ✓");
 }
 
 function adj(exKey, field, delta) {
-  const c = getClient();
-  const ex = c.exercises[exKey];
+  const focused = document.querySelector(".num-input:focus");
+  if (focused) { setField(focused.dataset.exk, focused.dataset.field, focused.value); focused.blur(); }
+  const ex = getClient().exercises[exKey];
   const step = field === "weight" ? 2.5 : 1;
-  ex[field] = Math.max(0, parseFloat((ex[field] + delta * step).toFixed(1)));
+  ex[field] = Math.max(0, parseFloat(((ex[field] || 0) + delta * step).toFixed(1)));
   db.ref(`clients/${selClientKey}/exercises/${exKey}`).set(ex);
+  showSaving();
+  render();
+}
+
+function setField(exKey, field, rawVal) {
+  const val = parseFloat(rawVal);
+  if (isNaN(val) || val < 0) return;
+  const ex = getClient().exercises[exKey];
+  ex[field] = val;
+  db.ref(`clients/${selClientKey}/exercises/${exKey}`).set(ex);
+  showSaving();
+}
+
+function setBand(exKey, bandId) {
+  const ex = getClient().exercises[exKey];
+  ex.band = bandId || null;
+  db.ref(`clients/${selClientKey}/exercises/${exKey}/band`).set(bandId || null);
   showSaving();
   render();
 }
@@ -194,7 +255,9 @@ function adj(exKey, field, delta) {
 function addClient(name) {
   if (!name.trim()) return;
   const key = "c_" + Date.now();
-  clients[key] = { name: name.trim(), exercises: defaultExercises() };
+  const exercises = {};
+  allExNames().forEach(n => { exercises[safeKey(n)] = defaultEx(n); });
+  clients[key] = { name: name.trim(), exercises };
   db.ref("clients/" + key).set(clients[key]);
   showToast("Cliente añadido");
 }
@@ -202,7 +265,7 @@ function addClient(name) {
 function renameClient(key, newName) {
   if (!newName.trim()) return;
   clients[key].name = newName.trim();
-  db.ref("clients/" + key + "/name").set(newName.trim());
+  db.ref(`clients/${key}/name`).set(newName.trim());
   showSaving();
 }
 
@@ -212,51 +275,91 @@ function deleteClient(key) {
   view = "clients"; selClientKey = null; render();
 }
 
-function drawChart(canvasId, labels, data) {
-  if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
-  const canvas = document.getElementById(canvasId);
-  if (!canvas || data.length < 2) return;
-  chartInstance = new Chart(canvas, {
-    type: "line",
-    data: {
-      labels,
-      datasets: [{
-        data,
-        borderColor: "#1D9E75",
-        backgroundColor: "rgba(29,158,117,0.08)",
-        borderWidth: 2.5,
-        pointBackgroundColor: "#1D9E75",
-        pointRadius: 5,
-        tension: 0.3,
-        fill: true
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 12 }, color: "#8e8e93" } },
-        y: { grid: { color: "#f0f0f0" }, ticks: { font: { size: 12 }, color: "#8e8e93" } }
-      }
-    }
+function addCustomExercise(name) {
+  if (!name.trim()) return;
+  const key = "custom_" + Date.now();
+  db.ref("customExercises/" + key).set({ name: name.trim(), custom: true });
+  const updates = {};
+  Object.keys(clients).forEach(ck => {
+    updates[`clients/${ck}/exercises/${safeKey(name.trim())}`] = defaultEx(name.trim());
   });
+  if (Object.keys(updates).length) db.ref().update(updates);
+  showToast(`"${name.trim()}" añadido a todos los clientes`);
 }
 
-function render() {
-  const app = document.getElementById("app");
-  const dotHtml = `<span class="status-dot${isOnline ? ' online' : ''}" id="statusDot"></span>`;
+// ─── Render helpers ──────────────────────────────────────────────────────────
+function exCard(exName, c, isCustom) {
+  const k   = safeKey(exName);
+  const ex  = c.exercises[k] || defaultEx(exName);
+  const w   = ex.weight !== undefined ? ex.weight : 0;
+  const r   = ex.reps   !== undefined ? ex.reps   : 10;
+  const s   = ex.sets   !== undefined ? ex.sets   : 3;
+  const cls = isCustom ? "ex-name-custom" : "ex-name-btn";
 
+  let topRow = "";
+  if (k === CHIN_KEY) {
+    const cur = ex.band || null;
+    const circles = BANDS.map(b =>
+      `<button class="band-circle${cur === b.id ? " active" : ""}" style="background:${b.color}"
+        data-exk="${k}" data-band="${b.id}" title="${b.label}"></button>`
+    ).join("");
+    topRow = `
+      <div class="ctrl-row">
+        <span class="ctrl-label">Goma</span>
+        <div class="band-row">
+          <button class="band-none-btn${!cur ? " active" : ""}" data-exk="${k}" data-band="">Sin goma</button>
+          ${circles}
+        </div>
+      </div>`;
+  } else {
+    topRow = `
+      <div class="ctrl-row">
+        <span class="ctrl-label">Peso</span>
+        <button class="ctrl-btn" data-exk="${k}" data-field="weight" data-delta="-1">−</button>
+        <input type="number" class="num-input" value="${w}" min="0" step="0.5"
+          data-exk="${k}" data-field="weight" inputmode="decimal">
+        <span class="ctrl-unit">kg</span>
+        <button class="ctrl-btn" data-exk="${k}" data-field="weight" data-delta="1">+</button>
+      </div>`;
+  }
+
+  return `
+    <div class="ex-card">
+      <button class="${cls}" data-exk="${k}">${exName} ›</button>
+      ${topRow}
+      <div class="ctrl-row">
+        <span class="ctrl-label">Reps</span>
+        <button class="ctrl-btn" data-exk="${k}" data-field="reps" data-delta="-1">−</button>
+        <input type="number" class="num-input" value="${r}" min="0" step="1"
+          data-exk="${k}" data-field="reps" inputmode="numeric">
+        <button class="ctrl-btn" data-exk="${k}" data-field="reps" data-delta="1">+</button>
+      </div>
+      <div class="ctrl-row">
+        <span class="ctrl-label">Series</span>
+        <button class="ctrl-btn" data-exk="${k}" data-field="sets" data-delta="-1">−</button>
+        <input type="number" class="num-input" value="${s}" min="0" step="1"
+          data-exk="${k}" data-field="sets" inputmode="numeric">
+        <button class="ctrl-btn" data-exk="${k}" data-field="sets" data-delta="1">+</button>
+      </div>
+    </div>`;
+}
+
+// ─── Main render ─────────────────────────────────────────────────────────────
+function render() {
+  const app    = document.getElementById("app");
+  const dotHtml = `<span class="status-dot${isOnline ? " online" : ""}" id="statusDot"></span>`;
+
+  // ── CLIENTS LIST ──
   if (view === "clients") {
-    const sorted = Object.entries(clients).sort((a,b) => a[1].name.localeCompare(b[1].name));
+    const sorted = Object.entries(clients).sort((a, b) => a[1].name.localeCompare(b[1].name));
     const rows = sorted.length === 0
       ? `<div class="empty">Sin clientes todavía.<br>Pulsa "+ Cliente" para añadir.</div>`
-      : sorted.map(([key, c]) => `
-        <div class="client-row" data-key="${key}">
-          <div class="avatar">${getInitials(c.name)}</div>
-          <span class="client-name">${c.name}</span>
-          <span class="client-arrow">›</span>
-        </div>`).join("");
+      : sorted.map(([k, c]) =>
+          `<div class="client-row" data-key="${k}">
+            <div class="avatar">${getInitials(c.name)}</div>
+            <span class="client-name">${c.name}</span>
+            <span class="client-arrow">›</span>
+          </div>`).join("");
 
     const modal = showModal ? `
       <div class="modal-bg" id="modalBg">
@@ -279,39 +382,14 @@ function render() {
       <div class="content">${rows}</div>
       ${modal}`;
 
+  // ── CLIENT DETAIL ──
   } else if (view === "client") {
     const c = getClient();
-    const exCards = EXERCISES.map(exName => {
-      const k = safeKey(exName);
-      const ex = c.exercises[k] || { weight: 0, reps: 10, sets: 3 };
-      const weight = ex.weight !== undefined ? ex.weight : 0;
-      const reps   = ex.reps   !== undefined ? ex.reps   : 10;
-      const sets   = ex.sets   !== undefined ? ex.sets   : 3;
-      const wDisplay = weight === 0 ? "PC" : weight;
-      const wUnit = weight !== 0 ? `<span class="ctrl-unit">kg</span>` : "";
-      return `
-        <div class="ex-card">
-          <button class="ex-name-btn" data-exk="${k}">${exName} ›</button>
-          <div class="ctrl-row">
-            <span class="ctrl-label">Peso</span>
-            <button class="ctrl-btn" data-exk="${k}" data-field="weight" data-delta="-1">−</button>
-            <span class="ctrl-val">${wDisplay}</span>${wUnit}
-            <button class="ctrl-btn" data-exk="${k}" data-field="weight" data-delta="1">+</button>
-          </div>
-          <div class="ctrl-row">
-            <span class="ctrl-label">Reps</span>
-            <button class="ctrl-btn" data-exk="${k}" data-field="reps" data-delta="-1">−</button>
-            <span class="ctrl-val">${reps}</span>
-            <button class="ctrl-btn" data-exk="${k}" data-field="reps" data-delta="1">+</button>
-          </div>
-          <div class="ctrl-row">
-            <span class="ctrl-label">Series</span>
-            <button class="ctrl-btn" data-exk="${k}" data-field="sets" data-delta="-1">−</button>
-            <span class="ctrl-val">${sets}</span>
-            <button class="ctrl-btn" data-exk="${k}" data-field="sets" data-delta="1">+</button>
-          </div>
-        </div>`;
-    }).join("");
+    const baseCards   = BASE_EXERCISES.map(n => exCard(n, c, false)).join("");
+    const customNames = Object.values(customExList).map(e => e.name);
+    const customCards = customNames.length
+      ? `<div class="section-label">Ejercicios añadidos</div>` + customNames.map(n => exCard(n, c, true)).join("")
+      : "";
 
     const editModal = showEditModal ? `
       <div class="modal-bg" id="editModalBg">
@@ -321,6 +399,18 @@ function render() {
           <div class="modal-actions">
             <button class="btn-cancel" id="editCancelBtn">Cancelar</button>
             <button class="btn-confirm" id="editConfirmBtn">Guardar</button>
+          </div>
+        </div>
+      </div>` : "";
+
+    const addExModal = showAddExModal ? `
+      <div class="modal-bg" id="addExModalBg">
+        <div class="modal">
+          <div class="modal-title">Nuevo ejercicio</div>
+          <input class="modal-input" id="newExInput" placeholder="Nombre del ejercicio" autocomplete="off">
+          <div class="modal-actions">
+            <button class="btn-cancel" id="addExCancelBtn">Cancelar</button>
+            <button class="btn-confirm" id="addExConfirmBtn">Añadir para todos</button>
           </div>
         </div>
       </div>` : "";
@@ -335,34 +425,77 @@ function render() {
         <button class="btn-save" id="saveSessionBtn">Guardar sesión de hoy</button>
         <div class="action-row">
           <button class="btn btn-blue" id="editNameBtn">Editar nombre</button>
-          <button class="btn btn-red" id="deleteClientBtn">Eliminar cliente</button>
+          <button class="btn btn-red"  id="deleteClientBtn">Eliminar cliente</button>
         </div>
-        ${exCards}
+        ${baseCards}
+        ${customCards}
+        <button class="add-ex-btn" id="addExBtn">+ Añadir ejercicio para todos los clientes</button>
       </div>
-      ${editModal}`;
+      ${editModal}${addExModal}`;
 
+  // ── HISTORY ──
   } else if (view === "history") {
-    const c = getClient();
-    const ex = c.exercises[selExKey];
-    const exName = ex ? ex.name : selExKey;
-    const historyRaw = (c.history && c.history[selExKey]) ? c.history[selExKey] : {};
-    const entries = Object.entries(historyRaw).sort((a,b) => a[0].localeCompare(b[0]));
-    const labels = entries.map(([,v]) => formatDate(v.ts));
-    const weights = entries.map(([,v]) => v.weight);
+    const c          = getClient();
+    const ex         = c.exercises[selExKey];
+    const exName     = ex ? ex.name : selExKey;
+    const isChin     = selExKey === CHIN_KEY;
+    const raw        = (c.history && c.history[selExKey]) || {};
+    const entries    = Object.entries(raw).sort((a, b) => a[0].localeCompare(b[0]));
 
-    const chartSection = entries.length >= 2 ? `
-      <div class="history-section">
-        <div class="history-title">Evolución del peso</div>
-        <div class="chart-wrap"><canvas id="progressChart"></canvas></div>
-      </div>` : "";
+    let chartSection = "";
+    if (!isChin && entries.length >= 2) {
+      const labels  = entries.map(([, v]) => formatDate(v.ts));
+      const weights = entries.map(([, v]) => v.weight || 0);
+      chartSection  = `
+        <div class="history-section">
+          <div class="history-title">Evolución del peso</div>
+          <div class="chart-wrap"><canvas id="progressChart"></canvas></div>
+        </div>`;
+      setTimeout(() => {
+        if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+        const canvas = document.getElementById("progressChart");
+        if (canvas) chartInstance = new Chart(canvas, {
+          type: "line",
+          data: {
+            labels,
+            datasets: [{
+              data: weights, borderColor: "#1D9E75",
+              backgroundColor: "rgba(29,158,117,0.08)",
+              borderWidth: 2.5, pointBackgroundColor: "#1D9E75",
+              pointRadius: 5, tension: 0.3, fill: true
+            }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: { size: 12 }, color: "#8e8e93" } },
+              y: { grid: { color: "#f0f0f0" }, ticks: { font: { size: 12 }, color: "#8e8e93" } }
+            }
+          }
+        });
+      }, 50);
+    }
+
+    const bandLabel = id => BANDS.find(b => b.id === id)?.label || id;
+    const bandColor = id => BANDS.find(b => b.id === id)?.color || null;
 
     const listRows = entries.length === 0
-      ? `<div class="no-history">Sin sesiones registradas todavía.<br>Pulsa "Guardar sesión de hoy" desde el perfil del cliente.</div>`
-      : [...entries].reverse().map(([,v]) => `
-        <div class="history-row">
-          <span class="history-date">${formatDate(v.ts)}</span>
-          <span class="history-vals">${v.weight === 0 ? "PC" : v.weight + " kg"} · ${v.reps} reps · ${v.sets} series</span>
-        </div>`).join("");
+      ? `<div class="no-history">Sin sesiones registradas todavía.<br>Pulsa "Guardar sesión de hoy" en el perfil del cliente.</div>`
+      : [...entries].reverse().map(([, v]) => {
+          let vals = "";
+          if (isChin) {
+            const bc  = v.band ? bandColor(v.band) : null;
+            const dot = bc ? `<span class="band-dot" style="background:${bc}"></span>` : "";
+            vals = `${dot}${v.band ? bandLabel(v.band) : "Sin goma"} · ${v.reps} reps · ${v.sets} series`;
+          } else {
+            vals = `${v.weight === 0 ? "PC" : (v.weight || 0) + " kg"} · ${v.reps} reps · ${v.sets} series`;
+          }
+          return `<div class="history-row">
+            <span class="history-date">${formatDate(v.ts)}</span>
+            <span class="history-vals">${vals}</span>
+          </div>`;
+        }).join("");
 
     app.innerHTML = `
       <div class="header">
@@ -376,92 +509,93 @@ function render() {
           <div class="history-list">${listRows}</div>
         </div>
       </div>`;
-
-    if (entries.length >= 2) {
-      setTimeout(() => drawChart("progressChart", labels, weights), 50);
-    }
   }
 
   attachEvents();
 }
 
+// ─── Events ──────────────────────────────────────────────────────────────────
 function attachEvents() {
-  document.querySelectorAll(".client-row").forEach(el => {
-    el.addEventListener("click", () => { selClientKey = el.dataset.key; view = "client"; render(); });
-  });
+  // Client list
+  document.querySelectorAll(".client-row").forEach(el =>
+    el.addEventListener("click", () => { selClientKey = el.dataset.key; view = "client"; render(); })
+  );
 
+  // Back
   const backBtn = document.getElementById("backBtn");
   if (backBtn) backBtn.addEventListener("click", () => {
-    if (view === "client") { view = "clients"; selClientKey = null; }
-    else if (view === "history") { view = "client"; selExKey = null; }
+    if (view === "client")  { view = "clients"; selClientKey = null; }
+    if (view === "history") { view = "client";  selExKey     = null; }
     render();
   });
 
-  const saveSessionBtn = document.getElementById("saveSessionBtn");
-  if (saveSessionBtn) saveSessionBtn.addEventListener("click", saveSession);
+  // Save session
+  const saveBtn = document.getElementById("saveSessionBtn");
+  if (saveBtn) saveBtn.addEventListener("click", saveSession);
 
+  // Add client
   const addClientBtn = document.getElementById("addClientBtn");
   if (addClientBtn) addClientBtn.addEventListener("click", () => { showModal = true; render(); });
 
-  const cancelBtn = document.getElementById("cancelBtn");
-  if (cancelBtn) cancelBtn.addEventListener("click", () => { showModal = false; render(); });
-
   function confirmAdd() {
-    const input = document.getElementById("newClientInput");
-    if (input && input.value.trim()) addClient(input.value);
+    const v = document.getElementById("newClientInput")?.value;
+    if (v?.trim()) addClient(v);
     showModal = false; render();
   }
-  const confirmBtn = document.getElementById("confirmBtn");
-  if (confirmBtn) confirmBtn.addEventListener("click", confirmAdd);
+  document.getElementById("cancelBtn")?.addEventListener("click", () => { showModal = false; render(); });
+  document.getElementById("confirmBtn")?.addEventListener("click", confirmAdd);
+  const nci = document.getElementById("newClientInput");
+  if (nci) { nci.focus(); nci.addEventListener("keydown", e => { if (e.key==="Enter") confirmAdd(); if (e.key==="Escape") { showModal=false; render(); } }); }
+  document.getElementById("modalBg")?.addEventListener("click", e => { if (e.target.id==="modalBg") { showModal=false; render(); } });
 
-  const newClientInput = document.getElementById("newClientInput");
-  if (newClientInput) {
-    newClientInput.focus();
-    newClientInput.addEventListener("keydown", e => {
-      if (e.key === "Enter") confirmAdd();
-      if (e.key === "Escape") { showModal = false; render(); }
-    });
-  }
-
-  const editNameBtn = document.getElementById("editNameBtn");
-  if (editNameBtn) editNameBtn.addEventListener("click", () => { showEditModal = true; render(); });
-
-  const editCancelBtn = document.getElementById("editCancelBtn");
-  if (editCancelBtn) editCancelBtn.addEventListener("click", () => { showEditModal = false; render(); });
-
+  // Edit name
+  document.getElementById("editNameBtn")?.addEventListener("click", () => { showEditModal = true; render(); });
   function confirmEdit() {
-    const input = document.getElementById("editNameInput");
-    if (input && input.value.trim()) renameClient(selClientKey, input.value);
+    const v = document.getElementById("editNameInput")?.value;
+    if (v?.trim()) renameClient(selClientKey, v);
     showEditModal = false; render();
   }
-  const editConfirmBtn = document.getElementById("editConfirmBtn");
-  if (editConfirmBtn) editConfirmBtn.addEventListener("click", confirmEdit);
+  document.getElementById("editCancelBtn")?.addEventListener("click",  () => { showEditModal=false; render(); });
+  document.getElementById("editConfirmBtn")?.addEventListener("click", confirmEdit);
+  const eni = document.getElementById("editNameInput");
+  if (eni) { eni.focus(); eni.select(); eni.addEventListener("keydown", e => { if (e.key==="Enter") confirmEdit(); if (e.key==="Escape") { showEditModal=false; render(); } }); }
+  document.getElementById("editModalBg")?.addEventListener("click", e => { if (e.target.id==="editModalBg") { showEditModal=false; render(); } });
 
-  const editNameInput = document.getElementById("editNameInput");
-  if (editNameInput) {
-    editNameInput.focus(); editNameInput.select();
-    editNameInput.addEventListener("keydown", e => {
-      if (e.key === "Enter") confirmEdit();
-      if (e.key === "Escape") { showEditModal = false; render(); }
-    });
+  // Delete client
+  document.getElementById("deleteClientBtn")?.addEventListener("click", () => deleteClient(selClientKey));
+
+  // Add custom exercise
+  document.getElementById("addExBtn")?.addEventListener("click", () => { showAddExModal=true; render(); });
+  function confirmAddEx() {
+    const v = document.getElementById("newExInput")?.value;
+    if (v?.trim()) addCustomExercise(v);
+    showAddExModal = false; render();
   }
+  document.getElementById("addExCancelBtn")?.addEventListener("click",  () => { showAddExModal=false; render(); });
+  document.getElementById("addExConfirmBtn")?.addEventListener("click", confirmAddEx);
+  const nei = document.getElementById("newExInput");
+  if (nei) { nei.focus(); nei.addEventListener("keydown", e => { if (e.key==="Enter") confirmAddEx(); if (e.key==="Escape") { showAddExModal=false; render(); } }); }
+  document.getElementById("addExModalBg")?.addEventListener("click", e => { if (e.target.id==="addExModalBg") { showAddExModal=false; render(); } });
 
-  const editModalBg = document.getElementById("editModalBg");
-  if (editModalBg) editModalBg.addEventListener("click", e => { if (e.target === editModalBg) { showEditModal = false; render(); } });
+  // +/- buttons
+  document.querySelectorAll(".ctrl-btn").forEach(btn =>
+    btn.addEventListener("click", () => adj(btn.dataset.exk, btn.dataset.field, parseInt(btn.dataset.delta)))
+  );
 
-  const deleteClientBtn = document.getElementById("deleteClientBtn");
-  if (deleteClientBtn) deleteClientBtn.addEventListener("click", () => deleteClient(selClientKey));
-
-  document.querySelectorAll(".ctrl-btn").forEach(btn => {
-    btn.addEventListener("click", () => adj(btn.dataset.exk, btn.dataset.field, parseInt(btn.dataset.delta)));
+  // Inline inputs — save on change (blur / Enter)
+  document.querySelectorAll(".num-input").forEach(inp => {
+    inp.addEventListener("change", () => setField(inp.dataset.exk, inp.dataset.field, inp.value));
   });
 
-  document.querySelectorAll(".ex-name-btn").forEach(btn => {
-    btn.addEventListener("click", () => { selExKey = btn.dataset.exk; view = "history"; render(); });
-  });
+  // Band picker
+  document.querySelectorAll(".band-circle, .band-none-btn").forEach(btn =>
+    btn.addEventListener("click", () => setBand(btn.dataset.exk, btn.dataset.band))
+  );
 
-  const modalBg = document.getElementById("modalBg");
-  if (modalBg) modalBg.addEventListener("click", e => { if (e.target === modalBg) { showModal = false; render(); } });
+  // History
+  document.querySelectorAll(".ex-name-btn, .ex-name-custom").forEach(btn =>
+    btn.addEventListener("click", () => { selExKey = btn.dataset.exk; view = "history"; render(); })
+  );
 }
 </script>
 </body>
